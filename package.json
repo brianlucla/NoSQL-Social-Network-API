@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "express": "^4.18.2"
+  },
+  "dependencies": {
+    "mongoose": "^7.4.0"
+  },
+  "scripts":{
+    "start":"node server.js",
+    "seed": "node utils/seed.js"
+  }
+}
