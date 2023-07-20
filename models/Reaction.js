@@ -16,6 +16,7 @@ const reactionSchema = new Schema({
     // getter method ?
     
   }
-})
+  },
+)
 
 module.exports = reactionSchema;
