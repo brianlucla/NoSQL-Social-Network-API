@@ -14,9 +14,16 @@ const reactionSchema = new Schema({
     type:Date,
     default: Date.now,
     // getter method ?
-    
+    get: (createdAt) => {
+
+    }
   }
   },
-)
+  {
+    toJSON:{
+      getters:true,
+    }
+  }
+);
 
 module.exports = reactionSchema;

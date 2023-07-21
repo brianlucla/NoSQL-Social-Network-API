@@ -13,7 +13,6 @@ const userSchema = new Schema(
       type: SchemaTypes.Email,
       required:true,
       unique:true,
-      // matching validation ?
     },
     thoughts:[
       {
@@ -40,7 +39,7 @@ userSchema.virtual('friendCount').get(function(){
 });
 
 
-const User = model('user', userSchema);
+const User = model('User', userSchema);
 
 
 module.exports = User;
