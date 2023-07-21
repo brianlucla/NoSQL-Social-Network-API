@@ -1,4 +1,5 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, SchemaTypes } = require('mongoose');
+require('mongoose-type-email')
 
 const userSchema = new Schema(
   {
@@ -9,7 +10,7 @@ const userSchema = new Schema(
       unique:true
     },
     email:{
-      type:String,
+      type: SchemaTypes.Email,
       required:true,
       unique:true,
       // matching validation ?
@@ -38,6 +39,8 @@ userSchema.virtual('friendCount').get(function(){
   return this.friends.length;
 });
 
+
 const User = model('user', userSchema);
+
 
 module.exports = User;
