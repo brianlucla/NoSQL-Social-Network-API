@@ -15,7 +15,7 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      // getter method ?
+      // getter method to format date
       get: (createdAt) => {
         const formattedDate = dayjs(createdAt).format(
           "MMMM D, YYYY [at] hh:mm A"

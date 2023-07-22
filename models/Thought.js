@@ -12,6 +12,7 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
+      // getter method to format dates
       get: (createdAt) => {
         return dayjs(createdAt).format(
           "MMMM D, YYYY [at] hh:mm A"
