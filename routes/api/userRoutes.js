@@ -52,17 +52,19 @@ router.delete('/:userId', async(req, res)=>{
 
 router.post('/:userId/friends/:friendsId', async(req, res) => {
   try {
-    
+    const userData = await User.findOneAndUpdate({_id:req.params.userId}, {$push:{friends:req.params.friendsId}});
+    res.json(userData);
   } catch (error) {
-    
+    res.status(500).json(error);
   }
 });
 
 router.delete('/:userId/friends/:friendsId', async(req, res) => {
   try {
-    
+    const userData = await User.findOneAndUpdate({_id:req.params.userId}, {$pull:{friends:req.params.friendsId}});
+    res.json(userData);
   } catch (error) {
-    
+    res.status(500).json(error);
   }
 });
 

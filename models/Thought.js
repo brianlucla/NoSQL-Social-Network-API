@@ -1,24 +1,32 @@
 const { Schema, model } = require('mongoose');
 const reactionSchema = require('./Reaction');
+const dayjs = require('dayjs');
 
 const thoughtSchema = new Schema(
   {
-    thoughtText:{
-      type:String,
-      required:true,
+    thoughtText: {
+      type: String,
+      required: true,
       max_length: 280,
     },
-    createdAt:{
-      type:Date,
-      default:Date.now,
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: (createdAt) => {
+        return dayjs(createdAt).format(
+          "MMMM D, YYYY [at] hh:mm A"
+        );
+      },
     },
-    reactions: [reactionSchema]
+    reactions: [reactionSchema],
   },
   {
-    toJSON:{
+    toJSON: {
       virtuals: true,
-    }
-  });
+      getters:true,
+    },
+  }
+);
 
 thoughtSchema.virtual('reactionCount').get(function () {
   return this.reactions.length;

@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { Types } = require('mongoose');
 const Thought = require('../../models/Thought');
 const User = require('../../models/User');
 
@@ -35,7 +36,7 @@ router.post('/', async (req, res)=>{
 
 router.put('/:thoughtId', async (req, res)=>{
   try {
-    const thoughtData = await Thought.findOneAndUpdate({_id:req.params.thoughtId},req.body);
+    const thoughtData = await Thought.findOneAndUpdate({_id:req.params.thoughtId}, req.body);
     res.json(thoughtData);
   } catch (error) {
     res.status(500).json(error);
@@ -53,17 +54,19 @@ router.delete('/:thoughtId', async(req, res)=>{
 
 router.post('/:thoughtId/reactions', async (req,res) => {
   try {
-    
+    const thoughtData = await Thought.findOneAndUpdate({_id:req.params.thoughtId}, {$push:{reactions:req.body}});
+    res.json(thoughtData);
   } catch (error) {
-    
+    res.status(500).json(error);
   }
 });
 
-router.delete('/:thoughtId/reactions', async (req,res)=>{
+router.delete('/:thoughtId/reactions/:reactionId', async (req,res)=>{
   try {
-    
+    const thoughtData = await Thought.findOneAndUpdate({_id:req.params.thoughtId},{$pull:{reactions: Types.ObjectId(req.params.reactionId)}}, {new:true});
+    res.json(thoughtData);
   } catch (error) {
-    
+    res.status(500).json(error);
   }
 });
 
